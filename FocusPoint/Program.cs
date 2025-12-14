@@ -118,7 +118,7 @@ app.MapGet(
 
         // List next 20 events from primary calendar
         var request = service.Events.List("primary");
-        request.TimeMin = DateTime.UtcNow;
+        request.TimeMinDateTimeOffset = DateTime.UtcNow;
         request.ShowDeleted = false;
         request.SingleEvents = true;
         request.MaxResults = 20;
