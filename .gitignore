@@ -55,3 +55,4 @@ nunit-*.xml
 
 *.code-workspace
 .DS_Store
+FocusPointApi/wwwroot/*

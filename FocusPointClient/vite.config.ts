@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [vue()],
  build: {
-    outDir: '../wwwroot', // Output to .NET's static files folder
+    outDir: '../FocusPointApi/wwwroot', // Output to .NET's static files folder
     emptyOutDir: true
   },
   server: {
