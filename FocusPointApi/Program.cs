@@ -94,6 +94,8 @@ app.MapGet(
     }
 );
 
+app.MapGet("/api/connected", () => "Google Calendar connected! You can close this window.");
+
 // ---- 3) Example API endpoint: list events ----
 app.MapGet(
     "/api/google/events",
@@ -151,6 +153,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.MapFallbackToFile("index.html");
 
 app.UseRouting();
 

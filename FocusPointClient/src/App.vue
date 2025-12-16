@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
+
+fetch("/api/connected")
+  .then(response => response.text())
+  .then(data => {
+    alert(data); 
+  });
 </script>
 
 <template>

@@ -11,7 +11,11 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
-      '/api': 'https://localhost:5001' // Proxy API calls to .NET backend
-    }
+      '/api': {
+        target: 'http://localhost:5082', // .NET backend
+        changeOrigin: true,               // needed for virtual hosts
+        secure: false                     // allow self-signed SSL in dev
+      }
   }
+}
 })
