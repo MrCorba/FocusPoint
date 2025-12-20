@@ -1,15 +1,13 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import NavBar from './components/NavBar.vue';
 </script>
 
 <template>
   <div class="app-container">
-    <nav class="sidebar">
-      <ul>
-        <li><RouterLink to="/">Home</RouterLink></li>
-        <li><RouterLink to="/settings">Settings</RouterLink></li>
-      </ul>
-    </nav>
+    <aside class="sidebar">
+      <NavBar />
+    </aside>
     <main class="content">
       <RouterView />
     </main>
@@ -22,46 +20,27 @@ import { RouterLink, RouterView } from 'vue-router'
 .app-container {
   display: flex;
   height: 100vh;
-  margin: 0;
-  padding: 0;
 }
 
 .sidebar {
-  width: 250px;
-  background-color: $color-primary;
-  color: $color-primary-text;
-}
-
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar li {
-  margin-bottom: 10px;
-}
-
-.sidebar a {
-  text-decoration: none;
-  color: #333;
-  padding: 8px 12px;
-  display: block;
-  border-radius: 4px;
-}
-
-.sidebar a:hover {
-  background-color: $color-primary-hover;
-}
-
-.sidebar a.router-link-active {
-  background-color: $color-primary-active;
-  color: $color-primary-text;
+  width: $sidebar-width;
+  background: $sidebar-color-background;
+  color: $sidebar-color-text;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 8px;
+  gap: 8px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
 }
 
 .content {
   flex: 1;
   padding: 20px;
   overflow-y: auto;
+  margin-left: $sidebar-width;
 }
 </style>
