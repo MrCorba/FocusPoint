@@ -5,7 +5,6 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <div class="app-container">
     <nav class="sidebar">
-      <h2>FocusPoint</h2>
       <ul>
         <li><RouterLink to="/">Home</RouterLink></li>
         <li><RouterLink to="/settings">Settings</RouterLink></li>
@@ -17,22 +16,22 @@ import { RouterLink, RouterView } from 'vue-router'
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+  @use 'styles/_variables.scss' as *;
+
 .app-container {
   display: flex;
   height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 .sidebar {
   width: 250px;
-  background-color: #f5f5f5;
-  padding: 20px;
-  border-right: 1px solid #ddd;
+  background-color: $color-primary;
+  color: $color-primary-text;
 }
 
-.sidebar h2 {
-  margin: 0 0 20px 0;
-}
 
 .sidebar ul {
   list-style: none;
@@ -52,12 +51,12 @@ import { RouterLink, RouterView } from 'vue-router'
 }
 
 .sidebar a:hover {
-  background-color: #e0e0e0;
+  background-color: $color-primary-hover;
 }
 
 .sidebar a.router-link-active {
-  background-color: #007bff;
-  color: white;
+  background-color: $color-primary-active;
+  color: $color-primary-text;
 }
 
 .content {

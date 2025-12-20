@@ -1,21 +1,35 @@
+import path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue()],
- build: {
-    outDir: '../FocusPointApi/wwwroot', // Output to .NET's static files folder
+  resolve: {
+    // keep the alias for JS/TS imports if you want
+    alias: {
+      '@': path.resolve(__dirname, 'src')
+    }
+  },
+  build: {
+    outDir: '../FocusPointApi/wwwroot',
     emptyOutDir: true
   },
   server: {
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:5082', // .NET backend
-        changeOrigin: true,               // needed for virtual hosts
-        secure: false                     // allow self-signed SSL in dev
+        target: 'http://localhost:5082',
+        changeOrigin: true,
+        secure: false
       }
+    }
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        includePaths: [path.resolve(__dirname, 'src')]
+      }
+    }
   }
-}
 })
