@@ -42,7 +42,7 @@ a {
     padding: 10px;
 
     &.router-link-active {
-        background-color: $color-primary;
+        background-color: $color-primary-active;
         color: $color-primary-text;
     }
 
