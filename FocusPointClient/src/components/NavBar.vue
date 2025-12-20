@@ -4,11 +4,15 @@ import { RouterLink } from 'vue-router'
 
 <template>
     <nav class="nav-main">
-        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/">
+            <font-awesome-icon :icon="['fas', 'home']" />
+        </RouterLink>
     </nav>
 
     <nav class="nav-bottom">
-        <RouterLink to="/settings">Settings</RouterLink>
+        <RouterLink to="/settings">
+            <font-awesome-icon :icon="['fas', 'cogs']" />
+        </RouterLink>
     </nav>
 </template>
 
@@ -31,9 +35,20 @@ import { RouterLink } from 'vue-router'
     margin-bottom: 4px;
 }
 
+a {
+    font-size: 24px;
+    color: $sidebar-color-text;
+    border-radius: 4px;
+    padding: 10px;
 
-a.router-link-active {
-    background-color: $color-primary;
-    color: $color-primary-text;
+    &.router-link-active {
+        background-color: $color-primary;
+        color: $color-primary-text;
+    }
+
+    &:hover{
+        background-color: $color-primary-hover;
+        color: $color-primary-text;
+    }
 }
 </style>
