@@ -4,6 +4,7 @@ using Google.Apis.Auth.OAuth2.Responses;
 using Google.Apis.Calendar.v3;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options; 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +13,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
 
-builder.Services.AddSingleton<IDataStore, TokenStore>();
+// Configure SQLite database
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite("Data Source=focuspoint.db")
+);
+
+builder.Services.AddSingleton<IDataStore>(sp => new TokenStore(sp));
 
 builder.Services.Configure<GoogleSettings>(builder.Configuration.GetSection("GoogleSettings"));
 builder.Services.AddSingleton<GoogleAuthorizationCodeFlow>(sp =>

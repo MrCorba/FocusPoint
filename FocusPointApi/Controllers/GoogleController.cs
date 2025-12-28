@@ -31,7 +31,7 @@ public class GoogleController : ControllerBase
             new BaseClientService.Initializer
             {
                 HttpClientInitializer = credential,
-                ApplicationName = "My .NET 8 + Vue Calendar App",
+                ApplicationName = "FocusPoint",
             }
         );
 

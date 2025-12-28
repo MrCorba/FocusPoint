@@ -56,3 +56,7 @@ nunit-*.xml
 *.code-workspace
 .DS_Store
 FocusPointApi/wwwroot/*
+
+*.db
+*.db-shm
+*.db-wal
