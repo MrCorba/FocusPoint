@@ -1,0 +1,49 @@
+{
+    "sections": [{
+        "label": "Main Settings",
+        "settings": [
+            {
+                "name": "enableFeatureX",
+                "type": "boolean",
+                "label": "Enable Feature X",
+                "default": true
+            },
+            {
+                "name": "maxItems",
+                "type": "number",
+                "label": "Maximum Items",
+                "default": 10,
+                "min": 1,
+                "max": 100
+            },
+            {
+                "name": "apiEndpoint",
+                "type": "string",
+                "label": "API Endpoint URL",
+                "default": "https://api.example.com"
+            }
+        ]
+    },
+    {
+        "label": "Advanced Settings",
+        "settings": [
+            {
+                "name": "timeout",
+                "type": "number",
+                "label": "Request Timeout (ms)",
+                "default": 5000,
+                "min": 1000,
+                "max": 30000
+            },
+            {
+                "name": "retryAttempts",
+                "type": "number",
+                "label": "Retry Attempts",
+                "default": 3,
+                "min": 0,
+                "max": 10
+            }
+        ]
+    }
+]
+}
