@@ -13,13 +13,15 @@ builder.Services.AddControllers();
 
 builder.Services.AddSingleton<IDataStore, TokenStore>();
 
+builder.Services.Configure<GoogleSettings>(builder.Configuration.GetSection("GoogleSettings"));
 builder.Services.AddSingleton<GoogleAuthorizationCodeFlow>(sp =>
 {
-    var cfg = builder.Configuration.GetSection("Google");
+    var googleSettings = sp.GetRequiredService<IOptions<GoogleSettings>>().Value;
+
     var clientSecrets = new ClientSecrets
     {
-        ClientId = cfg["ClientId"]!,
-        ClientSecret = cfg["ClientSecret"]!,
+        ClientId = googleSettings.ClientId,
+        ClientSecret = googleSettings.ClientSecret,
     };
 
     return new GoogleAuthorizationCodeFlow(
