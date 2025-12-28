@@ -1,30 +1,30 @@
 using Google.Apis.Auth.OAuth2.Flows;
 using Google.Apis.Auth.OAuth2.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options; 
 
 [ApiController]
 [Route("integrations/google")]
 public class IntegrationsController : ControllerBase
 {
     private readonly GoogleAuthorizationCodeFlow _flow;
-    private readonly IConfiguration _config;
+    private readonly GoogleSettings _googleSettings;
     private readonly IUserService _userService;
 
-    public IntegrationsController(GoogleAuthorizationCodeFlow flow, IConfiguration config, IUserService userService)
+    public IntegrationsController(GoogleAuthorizationCodeFlow flow, IOptions<GoogleSettings> googleSettings, IUserService userService)
     {
         _flow = flow;
-        _config = config;
+        _googleSettings = googleSettings.Value;
         _userService = userService;
     }
 
     [HttpGet("connect")]
     public IActionResult Connect()
     {
-        var redirectUri = _config["Google:RedirectUri"]!;
         var userId = _userService.GetLocalUserId(HttpContext);
 
         var state = Guid.NewGuid().ToString("N");
-        var req = _flow.CreateAuthorizationCodeRequest(redirectUri);
+        var req = _flow.CreateAuthorizationCodeRequest(_googleSettings.RedirectUri);
         req.State = state;
         // Uncomment and adjust as needed:
         // req.AccessType = "offline";
@@ -41,12 +41,11 @@ public class IntegrationsController : ControllerBase
             return BadRequest("Missing 'code'.");
 
         var userId = _userService.GetLocalUserId(HttpContext);
-        var redirectUri = _config["Google:RedirectUri"]!;
 
         TokenResponse token = await _flow.ExchangeCodeForTokenAsync(
             userId: userId,
             code: code,
-            redirectUri: redirectUri,
+            redirectUri: _googleSettings.RedirectUri,
             taskCancellationToken: HttpContext.RequestAborted
         );
 
